@@ -3,13 +3,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Stopwatch extends Thread {
-
+// initialise variables
     public String name;
     public String time;
     public static int counter = 0;
     public static int seconds = 0;
     public static int minutes= 0;
     public static int hours = 0;
+    public static Boolean isTrue = true;
 
 
     public static Lock lock = new ReentrantLock();
@@ -22,11 +23,11 @@ public class Stopwatch extends Thread {
     {
         this.name = name;
     }
-
+  // this method will increment the counter (miliseconds by 10) then convert them to seconds, which will be converted to minutes and finally hours
     public void run()
     {
 
-        while (true) {
+        while (isTrue) {
             lock.lock();
 
 //            time = hours + ":" + minutes +":" +seconds + ":" + counter;
@@ -59,10 +60,10 @@ public class Stopwatch extends Thread {
     public static void main(String[] args) {
 
         Stopwatch s1 = new Stopwatch("S1");
-//
+// starts the stopwatch
         s1.start();
     }
-
+// Getters and Setters
     public static int getCounter() {
         return counter;
     }
